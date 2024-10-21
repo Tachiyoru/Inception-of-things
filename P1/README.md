@@ -42,7 +42,7 @@ This part of the project involves setting up **two virtual machines** using Vagr
    - Use the latest stable Linux distribution (e.g., Debian).
    - Configure VMs with 1 CPU, 1024 MB RAM, and the dedicated IPs as mentioned.
 2. **Install K3s**:
-   - On the Server, install K3s in controller mode.
+   - On the Server, install [K3s](https://docs.k3s.io/) in controller mode.
    - On the Server Worker, install K3s in agent mode.
 3. **Install kubectl**:
    - Ensure `kubectl` is installed on both machines to manage the cluster.

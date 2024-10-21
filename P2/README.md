@@ -14,7 +14,7 @@ The goal of this exercise is to deploy three web applications in a K3s cluster u
 
 ## Key Concepts:
 - **Vagrant**: An open-source tool that simplifies creating and managing virtualized development environments. In this project, Vagrant automates the setup of a VM with K3s.
-- [**K3s**](https://docs.k3s.io/): A lightweight version of Kubernetes ideal for low-resource environments. It is used to orchestrate the deployment of web applications within your VM.
+- **K3s**: A lightweight version of Kubernetes ideal for low-resource environments. It is used to orchestrate the deployment of web applications within your VM.
 - **Ingress**: Ingress configuration is used to route traffic based on the hostname to different web applications in your cluster.
 - **Services**: Services expose your applications inside the cluster and allow traffic to reach the web apps.
 
