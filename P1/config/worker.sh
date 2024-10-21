@@ -1,8 +1,7 @@
 #!/bin/bash
 sudo apt update
 sudo apt install curl -y
-sudo apt install net-tools
-sudo apt update
+
 # Variables
 SERVER_IP=$1
 WORKER_IP=$2

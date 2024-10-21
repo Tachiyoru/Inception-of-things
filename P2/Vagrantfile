@@ -1,0 +1,22 @@
+
+cpus           = ENV['CPUS'] || 1
+memory         = ENV['MEMORY'] || 1024
+BOX            = ENV['VERSION'] || "debian/bullseye64"
+SERVER_NAME    = "ccheyrouS"
+SERVER_IP      = "192.168.56.110"
+
+Vagrant.configure("2") do |config|
+  config.vm.box = BOX
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = memory 
+    vb.cpus = cpus
+  end
+
+  # # Server vm
+  config.vm.define SERVER_NAME do |ccheyrouS|
+    ccheyrouS.vm.hostname = SERVER_NAME 
+    ccheyrouS.vm.synced_folder "config/", "/vagrant"  
+    ccheyrouS.vm.network "private_network", ip: SERVER_IP 
+    ccheyrouS.vm.provision "shell", path: "config/server.sh", args: [SERVER_IP] 
+  end
+end
