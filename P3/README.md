@@ -60,3 +60,4 @@ In this part of the project, you will set up K3d (K3s in Docker) and configure a
 
 - Wil’s DockerHub repository: [https://hub.docker.com/r/wil42/playground](https://hub.docker.com/r/wil42/playground)
 - K3D documentation: [https://k3d.io](https://k3d.io)
+- ArgoCD doc: [test](https://argo-cd.readthedocs.io/en/stable/getting_started/)
