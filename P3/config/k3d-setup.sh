@@ -8,8 +8,10 @@ kubectl create namespace dev
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
-# cp -r /vagrant/k3s-config /tmp/k3s
+
+cp -r /vagrant/k3d-config /tmp/k3s
 # kubectl apply -f /tmp/k3s/ingress.yaml
+kubectl apply -f /tmp/k3s/application.yml -n argocd
 
 # kubectl wait --for=condition=Ready -n argocd --all --timeout=15s
 
