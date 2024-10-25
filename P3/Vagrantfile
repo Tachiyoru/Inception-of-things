@@ -4,9 +4,11 @@ BOX            = ENV['VERSION'] || "debian/bullseye64"
 SERVER_NAME    = "sleonS"
 SERVER_IP      = "192.168.56.110"
 
+
 Vagrant.configure("2") do |config|
   config.vm.box = BOX
   config.vm.provider "virtualbox" do |vb|
+  # config.vm.network "forwarded_port", guest: 8080, host: 8080
     vb.memory = memory 
     vb.cpus = cpus
   end
@@ -16,7 +18,7 @@ Vagrant.configure("2") do |config|
     sleonS.vm.hostname = SERVER_NAME 
     sleonS.vm.synced_folder "config/", "/vagrant"  
     sleonS.vm.network "private_network", ip: SERVER_IP 
+    sleonS.vm.provision "shell", path: "config/install.sh", args: [SERVER_IP] 
     sleonS.vm.provision "shell", path: "config/k3d-setup.sh", args: [SERVER_IP] 
-    sleonS.vm.provision "shell", path: "config/server.sh", args: [SERVER_IP] 
   end
 end
