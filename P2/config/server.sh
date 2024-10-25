@@ -10,6 +10,7 @@ curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--node-ip $SERVER_IP --bind-add
 
 # Attendre que K3s soit complètement installé
 sleep 10
+echo "Kubernetes a été installé avec succès sur le serveur"
 
 # Ajouter un alias pour 'kubectl' pour tous les utilisateurs
 echo "alias k='kubectl'" >> /etc/profile.d/00-aliases.sh
@@ -20,13 +21,11 @@ echo "${SERVER_IP} app2.com" | sudo tee -a /etc/hosts
 echo "${SERVER_IP} app3.com" | sudo tee -a /etc/hosts
 
 # Set-up des applications
-cp -r /vagrant/k8s-config /tmp/k8s
-kubectl apply -f /tmp/k8s/app1-deployment.yml
-kubectl apply -f /tmp/k8s/app2-deployment.yml
-kubectl apply -f /tmp/k8s/app3-deployment.yml
-kubectl apply -f /tmp/k8s/app1-service.yml
-kubectl apply -f /tmp/k8s/app2-service.yml
-kubectl apply -f /tmp/k8s/app3-service.yml
-kubectl apply -f /tmp/k8s/ingress.yml
-
-echo "Kubernetes a été installé avec succès sur le serveur"
+cp -r /vagrant/k3s-config /tmp/k3s
+kubectl apply -f /tmp/k3s/app1-deployment.yml
+kubectl apply -f /tmp/k3s/app2-deployment.yml
+kubectl apply -f /tmp/k3s/app3-deployment.yml
+kubectl apply -f /tmp/k3s/app1-service.yml
+kubectl apply -f /tmp/k3s/app2-service.yml
+kubectl apply -f /tmp/k3s/app3-service.yml
+kubectl apply -f /tmp/k3s/ingress.yml
