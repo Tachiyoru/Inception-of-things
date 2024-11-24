@@ -2,9 +2,6 @@
 sudo apt update
 sudo apt install ca-certificates curl -y
 
-# Variables
-SERVER_IP=$1
-
 if command -v kubectl &> /dev/null; then
     echo "Kubectl installation found"
 else
@@ -12,7 +9,7 @@ else
     sudo chmod +x ./kubectl
     sudo mv ./kubectl /usr/local/bin/kubectl
     kubectl version --client
-    # Attendre que kubectl soit complètement installé
+
     sleep 10
 fi
 
@@ -26,5 +23,4 @@ fi
 # Installer K3d sur le serveur
 curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
 
-# Attendre que K3d soit complètement installé
 sleep 10
