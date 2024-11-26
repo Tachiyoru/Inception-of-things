@@ -7,7 +7,7 @@ spec:
   project: default
   source :
     path: dev
-    repoURL:  https://github.com/Tachiyoru/IOT-Yous-Shan
+    repoURL:  https://github.com/Tachiyoru/IOT-Yous-Shan-Jim
     targetRevision: HEAD
   destination:
     server: 'https://kubernetes.default.svc'
