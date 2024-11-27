@@ -13,9 +13,9 @@ clean:
 	@sudo docker system prune -fa
 
 app:
-	@sudo kubectl port-forward svc/wil-service -n dev 8888:8888
-	 # chmod +x app-port.sh
-	 # sh app-port.sh
+	 # @sudo kubectl port-forward svc/wil-service -n dev 8888:8888
+	 chmod +x app-port.sh
+	 sh app-port.sh
 
 re : clean all
 
