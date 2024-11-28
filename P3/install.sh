@@ -1,7 +1,6 @@
 #!/bin/bash
 sudo apt update
-sudo apt install curl
-# sudo apt install ca-certificates curl -y
+sudo apt install ca-certificates curl -y
 
 if command -v kubectl &> /dev/null; then
     echo "Kubectl installation found"
