@@ -1,6 +1,8 @@
 #!/bin/bash
 sudo apt update
 sudo apt install ca-certificates curl -y
+echo "###################### Install Docker ######################"
+
 
 if command -v kubectl &> /dev/null; then
     echo "Kubectl installation found"
@@ -20,7 +22,8 @@ else
     sudo sh get-docker.sh
 fi
 
-# Installer K3d sur le serveur
-curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
+echo "###################### Install K3d ######################"
 
-sleep 10
+wget -q -O - https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | TAG=v5.0.0 bash
+
+echo "alias k='kubectl'" >> /etc/profile.d/00-aliases.sh # Check if really need
