@@ -1,23 +1,14 @@
-SCRIPTS := ./install.sh ./k3d-setup.sh
+all :
+	cd scripts; sudo bash install.sh
 
-all:
-	chmod +x $(SCRIPTS)
-	for script in $(SCRIPTS); do \
-		$$script; \
-	done
+clean :
+	rm -f scripts/get-docker.sh
+	rm -f scripts/get_helm.sh
+	rm -f scripts/argocd_passwd
+	rm -f scripts/gitlab_passwd
+	rm -f scripts/argocd-linux-amd64
 
-clean:
-	kubectl delete ns argocd
-	kubectl delete ns dev
-	kubectl cluster delete argocd
-	docker system prune -fa
+fclean: clean
+	sudo k3d cluster delete -a
 
-app:
-	 # kubectl port-forward svc/wil-service -n dev 8888:8888
-	 chmod +x app-port.sh
-	 sh app-port.sh
-
-re : clean all
-
-
-.PHONY: all clean re app
+.PHONY : all clean fclean
