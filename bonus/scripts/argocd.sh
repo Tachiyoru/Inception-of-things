@@ -1,6 +1,11 @@
 #!/bin/bash
 
-kubectl create namespace argocd
+if ! kubectl get namespace argocd &>/dev/null; then
+  kubectl create namespace argocd
+else
+  echo "Namespace argocd already exists."
+fi
+
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 sleep 10
 
@@ -17,7 +22,7 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 echo ""
 
 kubectl apply -n argocd -f ../confs/argocd/ingress.yaml
-#kubectl apply -n argocd -f ../confs/argocd/project.yaml
-#kubectl apply -n argocd -f ../confs/argocd/argocd.yaml
+# kubectl apply -f ../confs/argocd/project.yaml
+# kubectl apply -f ../confs/argocd/argocd.yaml
 
 kubectl port-forward svc/argocd-server -n argocd 8080:443 >/dev/null 2>&1 &

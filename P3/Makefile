@@ -1,5 +1,5 @@
 all :
-	sudo bash script/install.sh
+	cd scripts; sudo bash install.sh
 
 clean :
 	rm -f scripts/get-docker.sh
