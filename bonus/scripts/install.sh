@@ -4,23 +4,20 @@ set -e
 
 echo "Starting Kubernetes setup..."
 
-# Ensure curl is installed
 if ! command -v curl &>/dev/null; then
   echo "Installing curl..."
   sudo apt-get update
   sudo apt-get install -y curl
 fi
 
-# Install kubectl
 if ! command -v kubectl &>/dev/null; then
   echo "Installing kubectl..."
-  curl -LO "https://dl.k8s.io/release/$(curl -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+  curl -LO https://dl.k8s.io/release/$(curl -Ls https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl
   sudo chmod +x kubectl
   sudo mv kubectl /usr/local/bin/kubectl
   kubectl version --client
 fi
 
-# Install Docker
 if ! command -v docker &>/dev/null; then
   echo "Installing Docker..."
   curl -fsSL https://get.docker.com -o get-docker.sh
@@ -29,14 +26,12 @@ if ! command -v docker &>/dev/null; then
   echo "Please log out and log back in to use Docker without sudo."
 fi
 
-# Install k3d
 if ! command -v k3d &>/dev/null; then
   echo "Installing k3d..."
   curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
   k3d --version
 fi
 
-# Install Helm
 if ! command -v helm &>/dev/null; then
   echo "Installing Helm..."
   curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
@@ -44,7 +39,6 @@ if ! command -v helm &>/dev/null; then
   ./get_helm.sh
 fi
 
-# Create k3d cluster
 if ! k3d cluster list | grep -q dev-cluster; then
   echo "Creating k3d cluster..."
   k3d cluster create dev-cluster
@@ -52,7 +46,6 @@ else
   echo "Cluster dev-cluster already exists."
 fi
 
-# Create namespaces
 for ns in gitlab argocd dev; do
   if ! kubectl get namespace "$ns" &>/dev/null; then
     kubectl create namespace "$ns"
@@ -61,7 +54,6 @@ for ns in gitlab argocd dev; do
   fi
 done
 
-# Install GitLab
 helm repo add gitlab https://charts.gitlab.io
 helm repo update
 helm upgrade --install gitlab gitlab/gitlab \
@@ -71,9 +63,8 @@ helm upgrade --install gitlab gitlab/gitlab \
   --set global.hosts.https=false \
   --timeout 1000s
 
-# Wait for GitLab pods
 echo "Waiting for GitLab pods to be ready..."
-kubectl wait --for=condition=Ready --all --namespace=gitlab --timeout=1000s
+kubectl wait pod --for=condition=Ready --all --namespace=gitlab --timeout=1000s
 
 
 echo "Gitlab password:"
