@@ -23,7 +23,8 @@ function setup_part2() {
   echo "➡️ Début de la configuration pour la Partie 2..."
   cd "$VAGRANT_PART2"
   vagrant up
-  vagrant ssh jilerouxS -c "sudo kubectl apply -f /vagrant/app.yaml && sudo kubectl apply -f /vagrant/ingress.yaml"
+  vagrant ssh
+  
   echo "✅ Applications déployées avec succès sur K3s !"
 }
 
