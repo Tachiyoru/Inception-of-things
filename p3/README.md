@@ -58,8 +58,5 @@ In this part of the project, you will set up K3d (K3s in Docker) and configure a
 
 ## Useful Links
 
-- [Wil’s DockerHub repository](https://hub.docker.com/r/wil42/playground)
-- [K3D documentation](https://k3d.io)
-- [ArgoCD doc](https://argo-cd.readthedocs.io/en/stable/getting_started/)
-- [ArgoCD tuto](https://www.youtube.com/watch?v=MeU5_k9ssrs)
-- [App files](https://github.com/Tachiyoru/IOT-Yous-Shan)
+- Wil’s DockerHub repository: [https://hub.docker.com/r/wil42/playground](https://hub.docker.com/r/wil42/playground)
+- K3D documentation: [https://k3d.io](https://k3d.io)

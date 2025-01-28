@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: argocd-project
+  labels:
+    app: argocd
+spec:
+  description: ArgoCD Project to deploy and manage our app locally
+  sourceRepos:
+  - "https://github.com/Tachiyoru/IOT-Jim-Shan-Manu"
+  destinations:
+  - namespace: dev
+    server: https://kubernetes.default.svc
+  orphanedResources:
+    warn: false

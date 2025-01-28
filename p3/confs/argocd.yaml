@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  labels:
+    app: argocd
+  name: argocd-app
+spec:
+  project: argocd-project
+  source:
+    repoURL: https://github.com/Tachiyoru/IOT-Jim-Shan-Manu.git
+    path: .
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
